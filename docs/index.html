@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study Smart - Pomodoro and Study Analytics App</title>
+    <meta
+      name="description"
+      content="Study Smart는 Next.js와 Supabase 기반 포모도로 학습 관리 앱입니다. 대시보드, 위클리 분석, 캘린더, 프로필, AI chat 기능을 제공합니다."
+    />
+    <link rel="canonical" href="https://lidge-jun.github.io/study-smart-app/" />
+    <meta property="og:title" content="Study Smart" />
+    <meta
+      property="og:description"
+      content="Pomodoro timer, study analytics, weekly patterns, calendar records, Supabase auth, and AI study chat."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lidge-jun.github.io/study-smart-app/" />
+    <meta property="og:image" content="https://lidge-jun.github.io/study-smart-app/assets/social-preview.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Study Smart" />
+    <meta name="twitter:description" content="Pomodoro and study analytics app built with Next.js and Supabase." />
+    <meta name="twitter:image" content="https://lidge-jun.github.io/study-smart-app/assets/social-preview.svg" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        color: #111827;
+        background: #f8fafc;
+        font-family:
+          Pretendard, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-width: 320px; }
+      a { color: inherit; }
+      .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 0; }
+      .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 850; text-decoration: none; }
+      .mark { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: #111827; color: #fff; font-size: 12px; }
+      nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 16px; color: #475569; font-size: 14px; font-weight: 750; }
+      .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr); gap: 40px; align-items: center; min-height: calc(100vh - 86px); padding: 34px 0 72px; }
+      .eyebrow { color: #16a34a; font-size: 13px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+      h1 { margin: 14px 0 18px; font-size: clamp(42px, 7vw, 84px); line-height: 0.95; letter-spacing: 0; }
+      .lede { max-width: 680px; color: #475569; font-size: clamp(18px, 2vw, 22px); }
+      .actions, .stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+      .button { display: inline-flex; min-height: 44px; align-items: center; border-radius: 8px; padding: 0 16px; background: #111827; color: #fff; font-weight: 800; text-decoration: none; }
+      .button.secondary { border: 1px solid #dbe3ef; background: #fff; color: #111827; }
+      .stat, .panel, .card { border: 1px solid #dbe3ef; border-radius: 8px; background: #fff; }
+      .stat { min-width: 132px; padding: 14px; }
+      .stat strong { display: block; font-size: 24px; }
+      .stat span { color: #64748b; font-size: 13px; font-weight: 750; }
+      .panel { min-width: 0; overflow: hidden; box-shadow: 0 24px 70px rgb(17 24 39 / 0.08); }
+      .mock { padding: 24px; }
+      .mock-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .tile { min-height: 118px; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+      .tile strong { display: block; margin-bottom: 18px; }
+      .bar { height: 10px; border-radius: 999px; background: #dcfce7; margin-top: 10px; }
+      section { padding: 70px 0; border-top: 1px solid #dbe3ef; }
+      h2 { margin: 0 0 18px; font-size: clamp(30px, 4vw, 54px); line-height: 1; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      .card { min-width: 0; padding: 20px; }
+      .card h3 { margin: 0 0 10px; }
+      .card p, .card code { color: #475569; }
+      .card code { white-space: normal; overflow-wrap: anywhere; }
+      footer { padding: 34px 0; color: #64748b; font-size: 14px; }
+      @media (max-width: 900px) {
+        header { align-items: flex-start; flex-direction: column; }
+        nav { justify-content: flex-start; }
+        .hero, .grid { grid-template-columns: 1fr; }
+        .hero { min-height: auto; padding-top: 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="shell">
+      <a class="brand" href="https://github.com/lidge-jun/study-smart-app">
+        <span class="mark">SS</span>
+        <span>Study Smart</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#workflow">Workflow</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#security">Security</a>
+        <a href="https://study-smart-app-two.vercel.app">Vercel</a>
+      </nav>
+    </header>
+    <main>
+      <div class="shell hero">
+        <div>
+          <div class="eyebrow">Pomodoro study analytics</div>
+          <h1>학습 시간과 패턴을 한 화면에서 관리한다.</h1>
+          <p class="lede">
+            Study Smart는 포모도로 타이머, 학습 대시보드, 주간/월간 패턴, 프로필 게임화, Supabase 인증,
+            AI chat을 묶은 Next.js 학습 관리 앱입니다.
+          </p>
+          <div class="actions" aria-label="Primary links">
+            <a class="button" href="https://study-smart-app-two.vercel.app">Open app</a>
+            <a class="button secondary" href="https://github.com/lidge-jun/study-smart-app">Open repository</a>
+          </div>
+          <div class="stats" aria-label="Project signals">
+            <div class="stat"><strong>Next</strong><span>15.5.18</span></div>
+            <div class="stat"><strong>Supabase</strong><span>auth and DB</span></div>
+            <div class="stat"><strong>high</strong><span>audit gate clean</span></div>
+          </div>
+        </div>
+        <aside class="panel" aria-label="App surface preview">
+          <div class="mock">
+            <div class="mock-grid">
+              <div class="tile"><strong>Pomodoro</strong><span>25:00 focus</span><div class="bar"></div></div>
+              <div class="tile"><strong>Dashboard</strong><span>Today and weekly charts</span><div class="bar"></div></div>
+              <div class="tile"><strong>Calendar</strong><span>Monthly heatmap</span><div class="bar"></div></div>
+              <div class="tile"><strong>AI chat</strong><span>Study file context</span><div class="bar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <section id="workflow">
+        <div class="shell">
+          <h2>학습 루프를 데이터로 남긴다.</h2>
+          <div class="grid">
+            <article class="card"><h3>Timer</h3><p>포모도로 세션을 기록하고 커스텀 목표/휴식 설정을 관리합니다.</p></article>
+            <article class="card"><h3>Analytics</h3><p>대시보드, 위클리 뷰, 캘린더 히트맵으로 학습 패턴을 확인합니다.</p></article>
+            <article class="card"><h3>AI chat</h3><p>학습 문서와 코드 파일을 파싱해 chat context로 활용하는 실험 surface입니다.</p></article>
+          </div>
+        </div>
+      </section>
+      <section id="architecture">
+        <div class="shell">
+          <h2>Next.js App Router와 Supabase.</h2>
+          <div class="grid">
+            <article class="card"><h3>Frontend</h3><p>Next.js, React 19, Tailwind, Zustand, Recharts 기반 UI입니다.</p></article>
+            <article class="card"><h3>Backend</h3><p>Supabase Auth, PostgreSQL migrations, API routes, server/client helpers를 사용합니다.</p></article>
+            <article class="card"><h3>Deploy</h3><p>실제 앱은 Vercel에 있고, GitHub Pages는 public documentation 전용입니다.</p></article>
+          </div>
+        </div>
+      </section>
+      <section id="security">
+        <div class="shell">
+          <h2>키와 사용자 데이터는 private.</h2>
+          <div class="grid">
+            <article class="card"><h3>Supabase keys</h3><p><code>SUPABASE_SERVICE_ROLE_KEY</code>는 server-only로 유지해야 합니다.</p></article>
+            <article class="card"><h3>AI keys</h3><p>AI chat API key와 업로드 파일 내용은 사용자 데이터로 취급합니다.</p></article>
+            <article class="card"><h3>Audit</h3><p>High severity audit gate는 통과했고, moderate advisories 2개는 추적 중입니다.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="shell">
+      No root LICENSE file is declared. Pages deployment is prepared from /docs after an authorized push.
+    </footer>
+  </body>
+</html>

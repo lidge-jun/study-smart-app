@@ -1,79 +1,101 @@
-# Study Smart 📚⏰
+# Study Smart
 
-포모도로 기법과 학습 데이터 시각화에 기반한 학습 시간 관리 웹 애플리케이션
+[![CI](https://github.com/lidge-jun/study-smart-app/actions/workflows/ci.yml/badge.svg)](https://github.com/lidge-jun/study-smart-app/actions/workflows/ci.yml)
+[![Pages](https://github.com/lidge-jun/study-smart-app/actions/workflows/pages.yml/badge.svg)](https://github.com/lidge-jun/study-smart-app/actions/workflows/pages.yml)
+![Next.js](https://img.shields.io/badge/next-15.5.18-111827)
+![React](https://img.shields.io/badge/react-19-111827)
+![License pending](https://img.shields.io/badge/license-pending-6b7280)
 
-## 🌟 주요 기능
+포모도로 기법과 학습 데이터 시각화 기반 학습 시간 관리 웹 애플리케이션입니다. Supabase 인증/DB, Next.js App Router, 주간/월간 분석, AI chat, 파일 파서, 프로필 게임화 기능을 포함합니다.
 
-### ✅ 완료된 기능
-- **🍅 포모도로 타이머**: State Machine 기반 안정적인 타이머 시스템 (커스텀 시간 설정 지원)
-- **📊 실시간 대시보드**: 학습 통계 및 차트 시각화
-- **📅 위클리 뷰**: 주간 학습 패턴 분석 및 인사이트
-- **🗓️ 캘린더 뷰**: 월별 히트맵 및 일일 학습 기록
-- **🏆 프로필 & 게임화**: 레벨 시스템, 뱃지, 학습 분석
-- **⚙️ 개인화 설정**: D-day 설정, 목표 시간 관리, 과목별 시간 배분
-- **🌍 타임존 지원**: 전 세계 시간대 완벽 지원
-- **⏱️ 타이머 설정**: 사용자 맞춤 시간 설정 및 Auto-Start 옵션
-- **🔐 인증 시스템**: Supabase 기반 사용자 인증
-- **📱 반응형 UI**: 모든 디바이스에서 최적화된 사용자 경험
+## Public Surface
 
-## 🛠️ 기술 스택
+| Area | Current status |
+| --- | --- |
+| Repository | Public repo, GitHub reports 0 stars / 0 forks |
+| Production URL | https://study-smart-app-two.vercel.app |
+| Framework | Next.js 15.5.18, React 19, TypeScript, Tailwind CSS |
+| Backend | Supabase Auth + PostgreSQL + storage migrations |
+| Core app | Pomodoro timer, dashboard, weekly view, calendar, profile, settings |
+| AI surface | Local browser API key manager, chat sessions, file parsing for study context |
+| GitHub Pages | Prepared docs surface from `/docs` after an authorized push |
+| CI | Prepared in `.github/workflows/ci.yml`; no remote GitHub Actions runs yet |
+| License | No root `LICENSE` file is declared in this repository |
 
-- **Frontend**: Next.js 15, React, TypeScript, Tailwind CSS
-- **Backend**: Supabase (PostgreSQL, Authentication, Real-time)
-- **State Management**: Zustand
-- **Charts**: Recharts
-- **UI Components**: Headless UI, Heroicons
+## Features
 
-## 🚀 시작하기
+- Pomodoro timer with custom session settings and auto-start options.
+- Real-time dashboard metrics and chart visualizations.
+- Weekly study pattern view with heatmaps and insight cards.
+- Calendar view with monthly heatmap, journal editor, and session detail modal.
+- Profile and gamification: level, badges, goals, study analysis.
+- Supabase authentication and user settings.
+- AI chat surface with API key manager, chat sessions, file upload, and parsers for PDF, DOCX, CSV, code, image, and text.
+- Responsive app shell for desktop and mobile use.
 
-### 환경 설정
+## Quickstart
+
 ```bash
-# 의존성 설치
-npm install
-
-# 환경 변수 설정
+npm ci
 cp .env.example .env.local
-# .env.local 파일에 Supabase 키 설정 필요
-
-# 개발 서버 실행
 npm run dev
 ```
 
-### Supabase 설정
-1. [Supabase](https://supabase.com)에서 새 프로젝트 생성
-2. 데이터베이스 테이블 생성 (스키마 제공)
-3. 환경 변수에 API 키 설정
+Fill `.env.local` with Supabase values:
 
-## 📈 프로젝트 진행 상황
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_ENV=development
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
 
-- **전체 진행률**: 100%
-- **현재 단계**: Phase 7 완료 (세션 타입 필터링 수정)
-- **상태**: MVP 완성, Production 배포 준비 완료
+## Verification
 
-## 🎯 핵심 성과
+```bash
+npm ci
+NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co \
+NEXT_PUBLIC_SUPABASE_ANON_KEY=dummy-anon-key \
+SUPABASE_SERVICE_ROLE_KEY=dummy-service-key \
+NEXT_PUBLIC_BASE_URL=http://localhost:3000 \
+npm run build
+npm audit --audit-level=high
+```
 
-- ✅ 완전한 포모도로 시스템 구현 (커스텀 설정 포함)
-- ✅ 실시간 데이터 시각화 완성
-- ✅ 게임화 시스템 (레벨, 뱃지, 칭호)
-- ✅ 국제화 지원 (전 세계 타임존)
-- ✅ 프로덕션 빌드 안정화
+`npm run build` needs Supabase-looking environment values because App Router API routes instantiate Supabase clients during build-time page collection. The dummy values above are only for static verification; they are not valid app credentials.
 
-## 🔧 최근 업데이트
+Current audit state after package updates: `npm audit --audit-level=high` passes. `npm audit` still reports two moderate advisories through the current Next/PostCSS chain; do not claim a zero-vulnerability tree until those are resolved by a compatible upstream update.
 
-### 2025-07-16
-- 세션 타입 필터링 일관성 수정
-- 모든 페이지에서 학습 세션만 정확하게 집계
-- 휴식 세션이 '기타' 과목으로 잘못 분류되는 문제 해결
+## Architecture
 
-## 🤝 기여하기
+```text
+Next.js App Router
+  -> Supabase auth/client/server helpers
+  -> dashboard/calendar/weekly/profile/pomodoro routes
+  -> Zustand stores for timer, goals, AI chat
+  -> Supabase migrations under supabase/migrations
+```
 
-이 프로젝트는 학습 목적으로 개발되었습니다. 기여나 제안사항이 있으시면 Issues를 통해 알려주세요.
+Key directories:
 
-## 📄 라이선스
+| Path | Purpose |
+| --- | --- |
+| `app/` | App Router pages, layouts, API routes, auth callback |
+| `components/` | UI, dashboard, charts, calendar, weekly, pomodoro, AI chat |
+| `lib/` | Analytics, AI provider adapters, Supabase clients, parsers, utilities |
+| `store/` | Zustand state for timer, goals, and AI chat |
+| `supabase/migrations/` | Database schema and RPC migrations |
+| `docs/` | Prepared GitHub Pages public documentation |
 
-MIT License
+## Security & Privacy
 
----
+- Do not commit `.env.local`, Supabase service role keys, user exports, or chat/session data.
+- `SUPABASE_SERVICE_ROLE_KEY` is server-only and must never be exposed in client code.
+- AI chat API keys are managed in the browser-side app surface; treat browser storage and exports as sensitive.
+- File parsers may process private study documents. Avoid logging raw file content.
+- GitHub Pages hosts documentation only; the live app remains on Vercel/Supabase.
 
-**개발 기간**: 2025년 7월  
-**개발자**: Claude AI와 협업 개발
+## License
+
+This repository currently has no root `LICENSE` file. Add an explicit license before redistributing or depending on the project externally.

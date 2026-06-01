@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Study Smart preview">
+  <rect width="1200" height="630" fill="#f8fafc"/>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="#ffffff" stroke="#dbe3ef"/>
+  <text x="124" y="140" font-family="Inter, Arial, sans-serif" font-size="24" fill="#16a34a" font-weight="800" letter-spacing="5">STUDY SMART</text>
+  <text x="124" y="214" font-family="Inter, Arial, sans-serif" font-size="54" fill="#111827" font-weight="850">Pomodoro, analytics, and study history.</text>
+  <text x="124" y="272" font-family="Inter, Arial, sans-serif" font-size="26" fill="#475569">Next.js app backed by Supabase auth, charts, calendar, weekly insights, and AI chat.</text>
+  <g transform="translate(124 344)">
+    <rect width="220" height="90" rx="18" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="18" fill="#64748b">framework</text>
+    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="25" fill="#111827" font-weight="800">Next 15</text>
+  </g>
+  <g transform="translate(370 344)">
+    <rect width="220" height="90" rx="18" fill="#f8fafc" stroke="#dbe3ef"/>
+    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="18" fill="#64748b">backend</text>
+    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="25" fill="#111827" font-weight="800">Supabase</text>
+  </g>
+  <g transform="translate(616 344)">
+    <rect width="220" height="90" rx="18" fill="#f8fafc" stroke="#dbe3ef"/>
+    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="18" fill="#64748b">surface</text>
+    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="25" fill="#111827" font-weight="800">Vercel</text>
+  </g>
+  <circle cx="960" cy="204" r="76" fill="none" stroke="#22c55e" stroke-width="22"/>
+  <path d="M960 148v58l42 26" fill="none" stroke="#111827" stroke-width="18" stroke-linecap="round"/>
+  <text x="124" y="504" font-family="Inter, Arial, sans-serif" font-size="22" fill="#64748b">High-severity audit gate passes after package updates; two moderate advisories remain tracked.</text>
+</svg>
